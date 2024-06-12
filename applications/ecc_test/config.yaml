@@ -1,0 +1,4 @@
+ctg:
+  prod:
+    successors:
+      - "cons"
