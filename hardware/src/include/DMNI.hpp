@@ -73,6 +73,8 @@ public:
 	sc_in<uint32_t>			br_address;
 	sc_in<uint32_t>			br_payload;
 
+	sc_in<sc_uint<32>>		tick_counter;
+
 	SC_HAS_PROCESS(DMNI);
 	DMNI(sc_module_name name_, regmetadeflit address_router_ = 0, std::string path_ = "");
 
@@ -88,7 +90,10 @@ private:
 	unsigned flit_cntr;
 	int producer;
 	int consumer;
+	int n_errors_packet;
+	int n_errors_payload;
 	bool is_delivery;
+	bool with_error;
 
 	enum dmni_state {
 		WAIT, 

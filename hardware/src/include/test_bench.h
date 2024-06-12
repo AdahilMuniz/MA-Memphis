@@ -17,6 +17,8 @@
 #include <fstream>
 #include <string>
 #include <chrono>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -221,6 +223,7 @@ SC_MODULE(test_bench) {
 
 int sc_main(int argc, char *argv[])
 {
+	std::srand(std::time(nullptr));
 	int timeout = -1;
 
 	if(argc == 3){

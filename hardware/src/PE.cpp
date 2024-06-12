@@ -94,6 +94,8 @@ PE::PE(sc_module_name name_, regaddress address_, std::string path_) :
 	dmni.eop_out(eop_o_ni);
 	dmni.eop_in(eop_i_ni);
 
+	dmni.tick_counter(tick_counter);
+
 #ifdef FLIT_SNIFFER
 	for(int i = 0; i < LOCAL; i++){
 		sniffers.push_back(new FlitSniffer(string("sniffer"+to_string(i)).c_str(), address_, i, path_));

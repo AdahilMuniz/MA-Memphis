@@ -11,6 +11,8 @@
  * @brief Implements a DMA and NI module.
  */
 
+#include <cstdlib>
+
 #include "DMNI.hpp"
 
 DMNI::DMNI(sc_module_name name_, regmetadeflit address_router_, std::string path_) :
@@ -429,6 +431,12 @@ void DMNI::send()
 				send_size_2.write(size_2.read());
 				send_active.write(1);
 				DMNI_Send.write(LOAD);
+								
+				with_error = (
+					(tick_counter.read() > ERR_INJECTION_BEGIN) 
+					&& (tick_counter.read() < ERR_INJECTION_END)
+					&& ((std::rand() % 100) < ERR_INJECTION_PROB_GLOBAL)
+				);
 			}
 		break;
 
@@ -447,9 +455,29 @@ void DMNI::send()
 				if (send_size.read() > 0){
 
 					tx.write(1);
-					data_out.write(mem_data_read.read());
 					send_address.write(send_address.read() + WORD_SIZE);
 					send_size.write(send_size.read() - 1);
+
+					unsigned err_mask = 0;
+					if (
+						with_error 
+						&& send_size.read() != 13 // target
+						&& send_size.read() != 12 // size
+						&& send_size.read() != 11 // service
+						&& send_size.read() != 9 // cons_task
+						&& send_size.read() != 8 // msg_length
+						&& (std::rand() % 100) < ERR_INJECTION_PROB_FLIT
+					) {
+						for (int i = 0; i < 32; i++) {
+							if ((std::rand() % 100) < ERR_INJECTION_PROB_BIT) {
+								err_mask |= (1 << i);
+							}
+						}
+						if (err_mask)
+							std::cout << std::hex << "Injecting error in bits " << err_mask << std::endl;
+					}
+
+					data_out.write(mem_data_read.read() ^ err_mask);
 
 					// if(address_router == 1)
 					// 	cout << "[DMNI HW] " << mem_data_read.read() << endl;
