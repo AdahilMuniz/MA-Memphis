@@ -7,6 +7,7 @@
 
 int main()
 {
+	while(memphis_get_tick() < ECC_TEST_START);
 	puts("Inicio da aplicacao prod");
 
 	int *msg = malloc(ECC_TEST_FLITS*sizeof(int));
@@ -18,6 +19,8 @@ int main()
 		memphis_send(msg, ECC_TEST_FLITS*sizeof(int), MEMPHIS_MSG_ECC | cons);
 	}
 
+	while(memphis_get_tick() < ECC_TEST_END);
 	puts("Fim da aplicacao prod");
+	
 	return 0;
 }

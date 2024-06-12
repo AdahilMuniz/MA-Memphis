@@ -10,6 +10,7 @@ int main()
 	unsigned *time = malloc(ECC_TEST_ITERATIONS*sizeof(unsigned));
 	int *msg = malloc(ECC_TEST_FLITS*sizeof(int));
 
+	while(memphis_get_tick() < ECC_TEST_START);
 	puts("Inicio da aplicacao cons");
 
 	for(int i = 0; i < ECC_TEST_ITERATIONS; i++){
@@ -21,6 +22,7 @@ int main()
 		printf("%d\n", time[i]);
 	}
 
+	while(memphis_get_tick() < ECC_TEST_END);
 	puts("Fim da aplicacao cons");
 
 	return 0;
