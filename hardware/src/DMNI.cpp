@@ -464,8 +464,10 @@ void DMNI::send()
 						&& send_size.read() != 13 // target
 						&& send_size.read() != 12 // size
 						&& send_size.read() != 11 // service
+						&& send_size.read() != 10 // prod_task
 						&& send_size.read() != 9 // cons_task
-						&& send_size.read() != 8 // msg_length
+						&& send_size.read() != 5 // msg_length
+						&& send_size.read() != 4 // prod_addr
 						&& (std::rand() % 100) < ERR_INJECTION_PROB_FLIT
 					) {
 						for (int i = 0; i < 32; i++) {
