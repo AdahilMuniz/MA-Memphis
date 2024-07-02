@@ -1,3 +1,7 @@
+# Observation/Disclaimer
+
+This should be a fork from https://github.com/gaph-pucrs/MA-Memphis.git. However, it is not possible to fork the same repository more than once in GitHub and MAestro is already a fork from Memphis, so we needed this workaround.
+
 # MA-Memphis
 
 Application-Managed Many-core Modeling Platform for Heterogenous SoCs
