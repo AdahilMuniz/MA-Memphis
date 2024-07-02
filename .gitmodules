@@ -6,4 +6,5 @@
 	url = https://github.com/gaph-pucrs/libmutils
 [submodule "MAestro"]
 	path = MAestro
-	url = https://github.com/gaph-pucrs/MAestro
+	url = https://github.com/AdahilMuniz/MAestro.git
+	branch = smc_project
