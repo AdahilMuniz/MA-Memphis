@@ -1,0 +1,8 @@
+management:                 # Management application properties
+  - task: mapper_task       # The first in this list should ALWAYS be mapper_task
+    static_mapping: [0,0]   # All management task should have static mapping defined
+apps:                       # Application properties
+  - name: ecc_test
+    definitions:
+      - ECC_TEST_START: 500000
+      - ECC_TEST_END:  2500000

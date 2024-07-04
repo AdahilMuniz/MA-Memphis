@@ -1,0 +1,17 @@
+hw:                         # Hardware properties
+  page_size_KB: 64          # Size of each memory page (maximum task size)
+  tasks_per_PE: 1           # Maximum number of tasks in the same PE (will define memory size)
+  mpsoc_dimension: [3,3]    # Dimension of the many-core
+  Peripherals:              # Attached peripherals
+    - name: APP_INJECTOR    # Mandatory Application Injector peripheral
+      pe: 2,2               # is at border PE 2,2
+      port: N               # Connected at port NORTH. Note to use a border port.
+    - name: MAINJECTOR      # Mandatory MA Injector peripheral
+      pe: 0,0               # is connected at border PE 0,0
+      port: S               # Connected at port SOUTH. Note to use a border port
+  definitions:
+    - ERR_INJECTION_PROB_GLOBAL: 70
+    - ERR_INJECTION_PROB_FLIT: 10
+    - ERR_INJECTION_PROB_BIT: 3
+    - ERR_INJECTION_BEGIN: 500000
+    - ERR_INJECTION_END:  15000000
