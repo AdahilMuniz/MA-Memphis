@@ -16,10 +16,11 @@ int main()
 	for(int i = 0; i < ECC_TEST_ITERATIONS; i++){
 		memphis_receive(msg, ECC_TEST_FLITS*sizeof(int), MEMPHIS_MSG_ECC | prod);
 		time[i] = memphis_get_tick();
-	}
-
-	for(int i = 0; i < ECC_TEST_ITERATIONS; i++){
-		printf("%d\n", time[i]);
+		printf("MSG: \n");
+		for (int j = 0; j < ECC_TEST_FLITS; j++){
+			printf(" %x ", msg[j]);
+		}
+		printf("\n=======================\n");
 	}
 
 	while(memphis_get_tick() < ECC_TEST_END);
